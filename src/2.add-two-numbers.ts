@@ -4,9 +4,6 @@
  * [2] Add Two Numbers
  */
 
-
-
-// @lc code=start
 class ListNode {
   val: number;
   next: ListNode | null;
@@ -16,6 +13,7 @@ class ListNode {
   }
 }
 
+// @lc code=start
 function addTwoNumbers(l1: ListNode | null, l2: ListNode | null) {
   const n1Stringified = convertListNodeToReversedStringifiedNumber(l1);
   const n2Stringified = convertListNodeToReversedStringifiedNumber(l2);
