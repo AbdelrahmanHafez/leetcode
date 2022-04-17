@@ -3,11 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "tdd": "cross-env NODE_ENV=TEST nodemon --exec \"tsc && node ./node_modules/mocha/bin/mocha --inspect\"",
+    "tdd-brk": "cross-env NODE_ENV=TEST nodemon --exec \"tsc && node ./node_modules/mocha/bin/mocha --inspect-brk\""
+  },
   "author": "Hafez",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "mocha": "^9.2.2"
+  },
   "devDependencies": {
+    "@types/mocha": "^9.1.0",
     "@types/node-notifier": "^8.0.2",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
@@ -33,6 +39,17 @@
   "nodemonConfig": {
     "ignore": [
       "dist/*"
-    ]
+    ],
+    "ext": "js,ts,json"
+  },
+  "mocha": {
+    "spec": [
+      "!(node_modules)/**/*.test.js"
+    ],
+    "recursive": true,
+    "reporter": "min",
+    "sort": true,
+    "timeout": 10000,
+    "enable-source-maps": true
   }
 }
