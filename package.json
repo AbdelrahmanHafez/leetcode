@@ -4,9 +4,9 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "tdd": "cross-env NODE_ENV=TEST nodemon --exec \"tsc && node ./node_modules/mocha/bin/mocha --inspect\"",
-    "tdd-brk": "cross-env NODE_ENV=TEST nodemon --exec \"tsc && node ./node_modules/mocha/bin/mocha --inspect-brk\"",
-    "test": "tsc && cross-env NODE_ENV=TEST mocha --exit",
+    "tdd": "nodemon --exec \"tsc && node ./node_modules/mocha/bin/mocha --inspect\"",
+    "tdd-brk": "nodemon --exec \"tsc && node ./node_modules/mocha/bin/mocha --inspect-brk\"",
+    "test": "tsc && mocha --exit",
     "lint": "eslint ./ --ext .ts,.js"
   },
   "author": "Hafez",
