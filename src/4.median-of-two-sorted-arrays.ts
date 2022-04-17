@@ -25,7 +25,7 @@ function mergeSortedArrays(nums1: number[], nums2: number[]) {
 
   while (halfMergedArray.length <= arraysTotalLength / 2) {
     if (
-      (nums1[index1] !== undefined && nums1[index1] < nums2[index2]) ||
+      (nums1[index1] < nums2[index2] && nums1[index1] !== undefined) ||
        nums2[index2] === undefined
     ) {
       halfMergedArray.push(nums1[index1]);
