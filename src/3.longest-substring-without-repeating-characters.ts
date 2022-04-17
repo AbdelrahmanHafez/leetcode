@@ -8,26 +8,28 @@
 // @lc code=start
 
 function lengthOfLongestSubstring(string: string): number {
-  let maxCharactersCount = 0;
+  let startIndex = 0;
+  let maxLength = 0;
 
-  const { length } = string;
-  for (let i = 0; i < length; i++) {
-    const substringCharacters = new Set();
-    let substring = '';
-    let j = i;
+  const stringLength = string.length;
+  const charactersIndexesMap = new Map<string, number>();
 
-    while (string[j] !== undefined && substringCharacters.has(string[j]) === false) {
-      substringCharacters.add(string[j]);
-      substring += string[j];
-      j++;
-      if (maxCharactersCount < substring.length) {
-        maxCharactersCount = substring.length;
-      }
+  for (let i = 0; i < stringLength; i++) {
+    const currentCharacter = string[i];
+    const duplicateCharacterIndex = charactersIndexesMap.get(currentCharacter);
+    charactersIndexesMap.set(currentCharacter, i);
+
+    if (duplicateCharacterIndex >= startIndex) {
+      startIndex = duplicateCharacterIndex + 1;
+    }
+
+    const currentLength = i - startIndex + 1;
+    if (currentLength > maxLength) {
+      maxLength = currentLength;
     }
   }
 
-
-  return maxCharactersCount;
+  return maxLength;
 }
 
 // @lc code=end
