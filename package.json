@@ -4,8 +4,8 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "tdd": "nodemon --exec \"tsc && node ./node_modules/mocha/bin/mocha --inspect\"",
-    "tdd-brk": "nodemon --exec \"tsc && node ./node_modules/mocha/bin/mocha --inspect-brk\"",
+    "tdd": "nodemon --exec \"tsc && node ./node_modules/mocha/bin/mocha --inspect || true\"",
+    "tdd-brk": "nodemon --exec \"tsc && node ./node_modules/mocha/bin/mocha --inspect-brk || true\"",
     "test": "tsc && mocha --exit",
     "lint": "eslint ./ --ext .ts,.js"
   },
