@@ -9,47 +9,30 @@ function convert(string: string, numRows: number) {
   if (numRows === 1) {
     return string;
   }
-  const matrix = createMatrix(numRows);
-  fillMatrix(string, numRows, matrix);
 
-  const zigzaggedString = convertMatrixToString(matrix);
-  return zigzaggedString;
+  const rows = Array(numRows).fill('');
+
+  let currentRow = 0;
+  let isGoingDown = false;
+
+  for (let i = 0; i < string.length; i++) {
+    const isFirstOrLastRow = currentRow === 0 || currentRow === numRows - 1;
+    if (isFirstOrLastRow) {
+      isGoingDown = !isGoingDown;
+    }
+
+    rows[currentRow] += string[i];
+
+    if (isGoingDown) {
+      currentRow++;
+    } else {
+      currentRow--;
+    }
+
+  }
+  return rows.join('');
 }
 
 // @lc code=end
 
 export { convert as convertToZigzag };
-
-function fillMatrix(string: string, numRows: number, matrix: any[]) {
-  let currentRowIndex = 0;
-  let directionIndex = -1;
-
-  for (const character of string) {
-    const isFirstOrLastRow = currentRowIndex === 0 || currentRowIndex === (numRows - 1);
-    if (isFirstOrLastRow) {
-      directionIndex *= -1;
-    }
-
-    matrix[currentRowIndex].push(character);
-
-    currentRowIndex += directionIndex;
-  }
-}
-
-function createMatrix(numRows: number) {
-  const matrix = [];
-
-  for (let i = 0; i < numRows; i++) {
-    matrix[i] = [];
-  }
-  return matrix;
-}
-
-function convertMatrixToString(matrix: string[][]) {
-  let result = '';
-
-  for (let i = 0; i < matrix.length; i++) {
-    result += matrix[i].join('');
-  }
-  return result;
-}
