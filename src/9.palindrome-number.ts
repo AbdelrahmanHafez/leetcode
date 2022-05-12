@@ -6,6 +6,8 @@
 
 // @lc code=start
 function isPalindrome(targetNumber: number): boolean {
+  const originalNumber = targetNumber;
+
   if (targetNumber < 0 || (targetNumber % 10 === 0 && targetNumber !== 0)) {
     return false;
   }
@@ -17,7 +19,7 @@ function isPalindrome(targetNumber: number): boolean {
     targetNumber = Math.floor(targetNumber / 10);
   }
 
-  return targetNumber === reversedNumber || targetNumber === Math.floor(reversedNumber / 10);
+  return originalNumber === reversedNumber || originalNumber === Math.floor(reversedNumber / 10);
 }
 // @lc code=end
 export { isPalindrome };
