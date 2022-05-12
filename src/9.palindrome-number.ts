@@ -5,20 +5,19 @@
  */
 
 // @lc code=start
-function isPalindrome(x: number) {
-  if (x < 0) {
+function isPalindrome(targetNumber: number): boolean {
+  if (targetNumber < 0 || (targetNumber % 10 === 0 && targetNumber !== 0)) {
     return false;
   }
 
-  const stringifiedNumber = x.toString();
-  const { length } = stringifiedNumber;
-  for (let i = 0; i < length / 2; i++) {
-    if (stringifiedNumber[i] !== stringifiedNumber[length - i - 1]) {
-      return false;
-    }
+  let reversedNumber = 0;
+
+  while (targetNumber > 0) {
+    reversedNumber = reversedNumber * 10 + targetNumber % 10;
+    targetNumber = Math.floor(targetNumber / 10);
   }
 
-  return true;
+  return targetNumber === reversedNumber || targetNumber === Math.floor(reversedNumber / 10);
 }
 // @lc code=end
 export { isPalindrome };
