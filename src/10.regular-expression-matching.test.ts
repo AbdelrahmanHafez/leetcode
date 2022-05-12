@@ -22,6 +22,10 @@ describe('isMatch(...)', () => {
     {
       inputs: ['aab', 'c*a*b'],
       output: true
+    },
+    {
+      inputs: ['ab', '.*c'],
+      output: false
     }
   ];
 

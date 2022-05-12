@@ -29,7 +29,7 @@ function isMatch(string: string, pattern: string): boolean {
       return false;
     }
 
-    const isCurrentCharacterMatch = string[i] && (string[i] === pattern[j] || pattern[j] === '.');
+    const isCurrentCharacterMatch = string[i] !== undefined && (string[i] === pattern[j] || pattern[j] === '.');
 
     if (pattern[j + 1] === '*') {
       const noStarValue = memoizedIsMatch(i, j + 2);
