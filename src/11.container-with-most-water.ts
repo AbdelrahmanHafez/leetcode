@@ -8,7 +8,9 @@
 function maxArea(heights: number[]): number {
   let startIndex = 0;
   let endIndex = heights.length - 1;
+
   let currentArea = 0;
+
   while (startIndex < endIndex) {
     const startHeight = heights[startIndex];
     const endHeight = heights[endIndex];
@@ -23,6 +25,7 @@ function maxArea(heights: number[]): number {
       endIndex--;
     }
   }
+
   return currentArea;
 }
 // @lc code=end
