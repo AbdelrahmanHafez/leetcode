@@ -15,13 +15,13 @@ function convert(string: string, numRows: number) {
   let currentRow = 0;
   let isGoingDown = false;
 
-  for (let i = 0; i < string.length; i++) {
+  for (const character of string) {
     const isFirstOrLastRow = currentRow === 0 || currentRow === numRows - 1;
     if (isFirstOrLastRow) {
       isGoingDown = !isGoingDown;
     }
 
-    rows[currentRow] += string[i];
+    rows[currentRow] += character;
 
     if (isGoingDown) {
       currentRow++;
