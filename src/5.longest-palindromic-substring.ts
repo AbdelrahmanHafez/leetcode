@@ -44,6 +44,6 @@ interface IState {
   length: number;
 }
 
-// // @lc code=end
+// @lc code=end
 
 export { longestPalindrome };
