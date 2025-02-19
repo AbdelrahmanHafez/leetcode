@@ -6,36 +6,26 @@
 
 // @lc code=start
 function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
-  const halfMergedArray: number[] = [];
   const totalLength = nums1.length + nums2.length;
+  const iterationsCount = totalLength / 2 + 1;
   let i = 0;
   let j = 0;
+  let previous = 0;
+  let current = 0;
 
-  while (
-    (i < nums1.length || j < nums2.length) &&
-    halfMergedArray.length <= totalLength / 2
-  ) {
-    const n1 = nums1[i];
-    const n2 = nums2[j];
-    if ((n1 < n2 && n1 !== undefined) || n2 === undefined) {
-      halfMergedArray.push(n1);
-      i++;
+  for (let count = 0; count < iterationsCount; count++) {
+    previous = current;
+    if (i < nums1.length && (j >= nums2.length || nums1[i] < nums2[j])) {
+      current = nums1[i++];
     } else {
-      halfMergedArray.push(n2);
-      j++;
+      current = nums2[j++];
     }
   }
-  if (halfMergedArray.length === 1) {
-    return halfMergedArray[0];
-  }
-  const isEven = totalLength % 2 === 0;
-  if (isEven) {
-    const firstMedian = halfMergedArray[halfMergedArray.length - 2];
-    const secondMedian = halfMergedArray[halfMergedArray.length - 1];
 
-    return (firstMedian + secondMedian) / 2;
+  if (totalLength % 2 === 0) {
+    return (previous + current) / 2;
   }
-  return halfMergedArray[halfMergedArray.length - 1];
+  return previous;
 }
 
 // @lc code=end
