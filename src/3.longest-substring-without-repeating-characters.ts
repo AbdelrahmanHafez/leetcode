@@ -4,34 +4,24 @@
  * [3] Longest Substring Without Repeating Characters
  */
 
-
 // @lc code=start
-
-function lengthOfLongestSubstring(string: string): number {
-  let startIndex = 0;
+function lengthOfLongestSubstring(s: string): number {
+  let left = 0;
   let maxLength = 0;
+  const stringLength = s.length;
+  const charactersSet = new Set<string>();
 
-  const stringLength = string.length;
-  const charactersIndexesMap = new Map<string, number>();
-
-  for (let i = 0; i < stringLength; i++) {
-    const currentCharacter = string[i];
-    const duplicateCharacterIndex = charactersIndexesMap.get(currentCharacter);
-    charactersIndexesMap.set(currentCharacter, i);
-
-    if (duplicateCharacterIndex >= startIndex) {
-      startIndex = duplicateCharacterIndex + 1;
+  for (let right = 0; right < stringLength; right++) {
+    while (charactersSet.has(s[right])) {
+      charactersSet.delete(s[left]);
+      left++;
     }
-
-    const currentLength = i - startIndex + 1;
-    if (currentLength > maxLength) {
-      maxLength = currentLength;
-    }
+    charactersSet.add(s[right]);
+    maxLength = Math.max(maxLength, right - left + 1);
   }
 
   return maxLength;
 }
-
 // @lc code=end
 
 export { lengthOfLongestSubstring };
