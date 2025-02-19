@@ -5,35 +5,38 @@
  */
 
 // @lc code=start
-function findMedianSortedArrays(nums1: number[], nums2: number[]) {
-  const { halfMergedArray, arraysTotalLength } = mergeSortedArrays(nums1, nums2);
-  if (arraysTotalLength % 2 === 0) {
-    return (halfMergedArray[halfMergedArray.length - 2] + halfMergedArray[halfMergedArray.length - 1]) / 2;
-  }
+function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
+  const halfMergedArray: number[] = [];
+  const totalLength = nums1.length + nums2.length;
+  let i = 0;
+  let j = 0;
 
-  return halfMergedArray[halfMergedArray.length - 1];
-}
-// @lc code=end
-export { findMedianSortedArrays };
-
-function mergeSortedArrays(nums1: number[], nums2: number[]) {
-  const arraysTotalLength = nums1.length + nums2.length;
-
-  let index1 = 0;
-  let index2 = 0;
-  const halfMergedArray = [];
-
-  while (halfMergedArray.length <= arraysTotalLength / 2) {
-    if (
-      (nums1[index1] < nums2[index2] && nums1[index1] !== undefined) ||
-       nums2[index2] === undefined
-    ) {
-      halfMergedArray.push(nums1[index1]);
-      index1++;
+  while (
+    (i < nums1.length || j < nums2.length) &&
+    halfMergedArray.length <= totalLength / 2
+  ) {
+    const n1 = nums1[i];
+    const n2 = nums2[j];
+    if ((n1 < n2 && n1 !== undefined) || n2 === undefined) {
+      halfMergedArray.push(n1);
+      i++;
     } else {
-      halfMergedArray.push(nums2[index2]);
-      index2++;
+      halfMergedArray.push(n2);
+      j++;
     }
   }
-  return { halfMergedArray, arraysTotalLength };
+  if (halfMergedArray.length === 1) {
+    return halfMergedArray[0];
+  }
+  const isEven = totalLength % 2 === 0;
+  if (isEven) {
+    const firstMedian = halfMergedArray[halfMergedArray.length - 2];
+    const secondMedian = halfMergedArray[halfMergedArray.length - 1];
+
+    return (firstMedian + secondMedian) / 2;
+  }
+  return halfMergedArray[halfMergedArray.length - 1];
 }
+
+// @lc code=end
+export { findMedianSortedArrays };
