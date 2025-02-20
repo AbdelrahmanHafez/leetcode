@@ -6,23 +6,20 @@
 
 // @lc code=start
 function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
-  // Ensure A is the smaller array.
   let A = nums1;
   let B = nums2;
   if (A.length > B.length) {
     [A, B] = [B, A];
   }
-
   const totalLength = A.length + B.length;
-  const halfTotal = Math.floor((totalLength + 1) / 2);
+  const halfTotal = Math.floor((totalLength + 1) / 2); // why + 1 here?
 
-  // Binary search range is from 0 to A.length (inclusive).
   let start = 0;
   let end = A.length;
 
   while (start <= end) {
-    const i = Math.floor((start + end) / 2); // Number of elements from A in left partition
-    const j = halfTotal - i; // Number of elements from B in left partition
+    const i = Math.floor((start + end) / 2);
+    const j = halfTotal - i;
 
     const ALeft = A[i - 1] ?? -Infinity;
     const ARight = A[i] ?? Infinity;
@@ -30,7 +27,6 @@ function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
     const BRight = B[j] ?? Infinity;
 
     if (ALeft <= BRight && BLeft <= ARight) {
-      // Found the correct partition.
       if (totalLength % 2 === 1) {
         return Math.max(ALeft, BLeft);
       } else {
@@ -45,7 +41,6 @@ function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
 
   throw new Error('Input arrays are not sorted correctly.');
 }
-
 
 // @lc code=end
 export { findMedianSortedArrays };
