@@ -6,42 +6,35 @@
 
 // @lc code=start
 function longestPalindrome(string: string) {
-  const state: IState = {
-    startIndex: 0,
-    length: 0
-  };
-
-  getLongestFromString(state, string, false);
-  getLongestFromString(state, string, true);
-
-  return string.slice(state.startIndex, state.startIndex + state.length);
-}
-
-function getLongestFromString(
-  state: IState,
-  string: string,
-  isOdd: boolean
-) {
+  let result = '';
+  let resultLength = 0;
   const stringLength = string.length;
 
-  for (let i = 0; i < stringLength; i++) {
-    let leftIndex = i;
-    let rightIndex = isOdd ? i : i + 1;
+  determinePalindrome(true);
+  determinePalindrome(false);
 
-    while (leftIndex >= 0 && rightIndex < stringLength && string[leftIndex] === string[rightIndex]) {
-      if (rightIndex - leftIndex + 1 > state.length) {
-        state.startIndex = leftIndex;
-        state.length = rightIndex - leftIndex + 1;
+  function determinePalindrome(isOdd: boolean) {
+    for (let i = 0; i < stringLength; i++) {
+      let leftIndex = i;
+      let rightIndex = isOdd ? i : i + 1;
+
+      while (
+        leftIndex >= 0 &&
+        rightIndex < stringLength &&
+        string[leftIndex] === string[rightIndex]
+      ) {
+        const currentLength = rightIndex - leftIndex + 1;
+        if (currentLength > resultLength) {
+          result = string.slice(leftIndex, rightIndex + 1);
+          resultLength = currentLength;
+        }
+        leftIndex--;
+        rightIndex++;
       }
-      leftIndex--;
-      rightIndex++;
     }
   }
-}
 
-interface IState {
-  startIndex: number;
-  length: number;
+  return result;
 }
 
 // @lc code=end
