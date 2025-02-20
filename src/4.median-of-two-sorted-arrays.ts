@@ -12,7 +12,7 @@ function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
     [A, B] = [B, A];
   }
   const totalLength = A.length + B.length;
-  const halfTotal = Math.floor((totalLength + 1) / 2); // why + 1 here?
+  const halfTotal = Math.floor((totalLength + 1) / 2);
 
   let start = 0;
   let end = A.length;
@@ -44,3 +44,10 @@ function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
 
 // @lc code=end
 export { findMedianSortedArrays };
+
+console.log(
+  findMedianSortedArrays(
+    [1, 2, 3, 4, 5],
+    [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+  )
+);
